@@ -2,9 +2,9 @@ import streamlit as st
 import numpy as np
 import cv2
 import os
-from keras.models import load_model, Sequential
-from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
-from keras.utils import to_categorical
+from tensorflow.keras.models import load_model, Sequential
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
+from tensorflow.keras.utils import to_categorical
 from PIL import Image
 from streamlit_drawable_canvas import st_canvas
 
