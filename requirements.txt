@@ -6,5 +6,4 @@ streamlit
 tensorflow
 keras
 protobuf
-numpy
 pandas
