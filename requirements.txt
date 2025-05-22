@@ -4,3 +4,7 @@ Pillow
 streamlit-drawable-canvas
 streamlit
 tensorflow
+keras
+protobuf
+numpy
+pandas
