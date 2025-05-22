@@ -1,6 +1,7 @@
-streamlit
-tensorflow
 opencv-python
 numpy
 Pillow
 streamlit-drawable-canvas
+streamlit==1.45.1
+tensorflow>=2.11,<2.15
+
