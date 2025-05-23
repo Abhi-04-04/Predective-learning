@@ -6,7 +6,7 @@ from streamlit_drawable_canvas import st_canvas
 import joblib
 import os
 
-MODEL_PATH = "mnist_model.pkl"
+MODEL_PATH = "mnist_cnn_model.h5"
 
 # Load model and scaler
 if os.path.exists(MODEL_PATH):
