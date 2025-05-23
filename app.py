@@ -12,12 +12,12 @@ MODEL_PATH = "mnist_cnn_model.h5"
 if os.path.exists(MODEL_PATH):
     model, scaler = joblib.load(MODEL_PATH)
 else:
-    st.error("❌ Model file not found. Please train and save it as 'mnist_model.pkl'.")
+    st.error("❌ Model file not found. Please train and save it as 'mnist_cnn_model.h5'.")
     st.stop()
 
 # Streamlit UI
 st.set_page_config(page_title="Digit Recognizer", layout="centered")
-st.title("✍️ Handwritten Digit Recognition (No TensorFlow)")
+st.title("Handwritten Digit Recognition ")
 st.markdown("Draw a digit (0–9) below in the box and click **Predict**.")
 
 # Drawing canvas
@@ -51,4 +51,4 @@ if canvas_result.image_data is not None:
         prediction = model.predict(flat_scaled)
         st.success(f"✅ Predicted Digit: **{prediction[0]}**")
 
-st.caption("🎨 Draw using your mouse or touchscreen.")
+st.caption(" Draw using your mouse or touchscreen.")
