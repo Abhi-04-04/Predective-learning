@@ -1,9 +1,7 @@
 opencv-python
 numpy
 Pillow
-streamlit-drawable-canvas
 streamlit
-tensorflow
-keras
-protobuf
-pandas
+streamlit-drawable-canvas
+scikit-learn
+joblib
