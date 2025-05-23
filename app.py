@@ -6,13 +6,13 @@ from streamlit_drawable_canvas import st_canvas
 import joblib
 import os
 
-MODEL_PATH = "mnist_cnn_model.h5"
+MODEL_PATH = "digit_model.h5"
 
 # Load model and scaler
 if os.path.exists(MODEL_PATH):
     model, scaler = joblib.load(MODEL_PATH)
 else:
-    st.error("❌ Model file not found. Please train and save it as 'mnist_cnn_model.h5'.")
+    st.error("❌ Model file not found. Please train and save it as 'digit_model.h5'.")
     st.stop()
 
 # Streamlit UI
