@@ -56,27 +56,19 @@
 import streamlit as st
 import numpy as np
 import cv2
-from PIL import Image
 from streamlit_drawable_canvas import st_canvas
 import joblib
 
-MODEL_PATH = "sklearn_digit_model.pkl"
-
 st.set_page_config(page_title="Digit Recognizer", layout="centered")
 st.title("✍️ Handwritten Digit Recognition (No TensorFlow)")
-
-# Load model safely
-try:
-    model = joblib.load(MODEL_PATH)
-except Exception as e:
-    st.error(f"❌ Failed to load model: {e}")
-    st.stop()
-
 st.markdown("Draw a digit (0–9) below:")
+
+# Load model
+model = joblib.load("sklearn_digit_model.pkl")
 
 canvas_result = st_canvas(
     fill_color="#000000",
-    stroke_width=18,
+    stroke_width=20,
     stroke_color="#FFFFFF",
     background_color="#000000",
     height=300,
@@ -88,13 +80,25 @@ canvas_result = st_canvas(
 if canvas_result.image_data is not None:
     img = canvas_result.image_data.astype("uint8")
     gray = cv2.cvtColor(img, cv2.COLOR_RGBA2GRAY)
-    resized = cv2.resize(gray, (8, 8), interpolation=cv2.INTER_AREA)
-    inverted = 255 - resized
-    scaled = inverted / 16.0
-    flat = scaled.flatten().reshape(1, -1)
 
-    st.image(resized, width=150, caption="🧪 8x8 Processed Image")
+    # Resize to 28x28 first to preserve better detail, then to 8x8
+    gray = cv2.resize(gray, (28, 28), interpolation=cv2.INTER_AREA)
+
+    # Normalize and threshold
+    _, thresh = cv2.threshold(gray, 128, 255, cv2.THRESH_BINARY_INV)
+
+    # Resize to 8x8 for model
+    small = cv2.resize(thresh, (8, 8), interpolation=cv2.INTER_AREA)
+
+    # Normalize for model (as sklearn digits dataset uses values 0-16)
+    norm = (small / 255.0) * 16
+    flat = norm.flatten().reshape(1, -1)
+
+    st.image(small, width=150, caption="🧪 8x8 Processed Image")
 
     if st.button("📌 Predict"):
         pred = model.predict(flat)
         st.success(f"✅ Predicted Digit: **{pred[0]}**")
+
+st.caption("🎨 Use your mouse or finger to draw.")
+
