@@ -13,5 +13,5 @@ def preprocess_image(image):
     image_array = np.array(image).astype("float32") / 255.0
     return image_array.reshape(1, 28, 28, 1)
 
-def load_model(path="mnist_cnn_model.h5"):
+def load_model(path="digit_model.h5"):
     return tf.keras.models.load_model(path)
