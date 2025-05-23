@@ -13,5 +13,5 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 model = SVC(gamma=0.001)
 model.fit(X_train, y_train)
 
-joblib.dump(model, "sklearn_digit_model.pkl")
+joblib.dump(model, "digit_model.h5")
 print(" Model saved as sklearn_digit_model.pkl")
